@@ -1,0 +1,72 @@
+class Book {
+    constructor(title, description, author) {
+        this.title = title;
+        this.description = description;
+        this.author = author;
+    }
+}
+            
+class Library {
+    constructor() {
+        this.books = [];
+    }
+
+    addBook(newBook) { 
+        let book = new Book(newBook['title'], newBook['description'], newBook['author'])
+        this.books.push(book)
+        return book
+    }
+
+    getBooks(){
+        return this.books
+    }
+
+    getBookById(id){
+        for (let i = 0; i < this.books.length; i+=1 ) {
+            if (this.books[i].title === id){
+                return this.books[i]
+            }
+
+        }
+
+        console.log('Livro inexistente na biblioteca')
+    } 
+    
+    removeBookById(id){
+        for (let i = 0; i < this.books.length; i+=1 ) {
+            if (this.books[i].title === id){
+                return this.books.splice(i,1)
+            }
+
+        }
+
+        console.log('Livro inexistente na biblioteca')
+    } 
+    
+
+    updateBookById(id,updateBook){
+        for (let i = 0; i < this.books.length; i+=1 ) {
+            if (this.books[i].title === id){
+                this.books[i].title = updateBook['title']
+                this.books[i].description = updateBook['description']
+                this.books[i].author = updateBook['author']
+                
+                console.log('Atualização realizada com sucesso')
+                return this.books[i]
+            }
+
+        console.log('Livro inexistente na biblioteca')
+        }
+
+    }
+}      
+
+
+const l = new Library()
+
+l.addBook({title:"Sapiens - Uma Breve História da Humanidade",description:"Não ficção",author:"Yuval Harari"})
+l.addBook({title:"Diário de um Banana",description:"Ficção juvenil",author:"Jeff Kinney"})
+console.log(l.getBooks())
+l.removeBookById("Diário de um Banana")
+console.log(l.getBookById("Sapiens - Uma Breve História da Humanidade"))
+console.log(l.updateBookById('Sapiens - Uma Breve História da Humanidade',{title:'Harry Potter e a Pedra Filosofa', description:'Romance, Literatura infantil, Literatura fantástica, Alta fantasia',author:'J. K. Rowling'} ))
